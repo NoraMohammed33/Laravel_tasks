@@ -5,7 +5,9 @@
 @endsection
 @section('body')
 
-<form method="POST" class="w-50" style="margin-top:60px; margin-left:200px;" >
+<form method="POST" action="/posts"  class="w-50" style="margin-top:60px; margin-left:200px;" >
+            @method('post')
+            @csrf
             <div class="mb-3">
                 <label for="title" class="form-label"> Title</label>
                 <input type="text" name="title" class="form-control" id="title" >
@@ -23,3 +25,6 @@
             </div>
         </form>
 @endsection
+
+
+
