@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\post;
+use App\Models\user;
+
 
 class itiController extends Controller
 {
@@ -19,15 +21,18 @@ class itiController extends Controller
     //     return view("iti.addPost");
     // }
 
+    function home(){
+        $posts = post::all();
+        return view('iti.itiHome',['posts'=>$posts]);
+    }
+    
     function create(){
         return view("iti.createPost");
     }
 
     function index(){
         $posts = post::all();
-
         return view('iti.index', ['posts'=>$posts]);
-
     }
 
     function show($id){
@@ -45,9 +50,23 @@ class itiController extends Controller
         $post = new post();
         $post->title= $post_info['title'];
         $post->description = $post_info['description'];
-        $post->postedpy = $post_info['postedpy'];
+        $post->postedby = $post_info['postCreator'];
         $post->save();
-        return to_route('iti.show', $post->id);
+        return to_route('iti.home');
+    }
+
+    function editpost($id){
+        $post = post::findOrfail($id);
+        return view('iti.editform', ['post'=>$post]);
+    }
+    function update($id){
+        $post_info= request()->all();
+        $post = post::findOrfail($id);
+        $post->title= $post_info['title'];
+        $post->description = $post_info['description'];
+        $post->postedby = $post_info['postCreator'];
+        $post->save();
+        return to_route('iti.home');
     }
 
     function destroy($id){
@@ -55,4 +74,12 @@ class itiController extends Controller
         $post->delete();
         return to_route('iti.index');
     }
+
+    function getuser(){
+        $users = user::paginate(10);
+        return view('iti.user', ['users'=>$users]);
+    }
 }
+
+
+

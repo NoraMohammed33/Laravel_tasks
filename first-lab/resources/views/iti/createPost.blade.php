@@ -5,7 +5,7 @@
 @endsection
 @section('body')
 
-<form method="POST" action="/posts"  class="w-50" style="margin-top:60px; margin-left:200px;" >
+<form method="POST" action="/iti"  class="w-50" style="margin-top:60px; margin-left:200px;" >
             @method('post')
             @csrf
             <div class="mb-3">

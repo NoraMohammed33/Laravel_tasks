@@ -25,7 +25,7 @@
                 <td> {{$post->postedby}}</td>
                 <td> {{$post->image}}</td>
                 <td>  <a href="{{route('iti.show',$post->id)}}"  class="btn btn-info">  Show</a> </td>
-                <td>  <a href=""  class="btn btn-warning">  Edit</a> </td>
+                <td>  <a href="{{route('iti.edit',$post->id)}}"  class="btn btn-warning">  Edit</a> </td>
                 <td>  <a href="{{route('iti.destroy', $post->id)}}"  class="btn btn-danger">  Delete</a> </td>
             </tr>
         @endforeach

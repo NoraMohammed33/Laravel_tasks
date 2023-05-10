@@ -3,11 +3,7 @@
     All products from database
 @endsection
 
-{{--@dd($products)  --}}
-
-{{--@dump($products)--}}
 @section('body')
-    <h1> {{$post->title}} Info</h1>
     <div class="card" style="width: 18rem;">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
