@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\post;
 use App\Models\user;
+use Carbon\Carbon;
 
 
 class itiController extends Controller
@@ -27,11 +28,17 @@ class itiController extends Controller
     }
     
     function create(){
-        return view("iti.createPost");
+        $users = user::all();
+        return view("iti.createPost",['users'=>$users]);
     }
 
     function index(){
-        $posts = post::all();
+        $posts = post::paginate(10);
+        foreach($posts as $post)
+        {
+            $post['created_at']=Carbon::parse($post['created_at']);
+            $post['created_at']->format('d.m.Y');
+        }
         return view('iti.index', ['posts'=>$posts]);
     }
 
@@ -50,23 +57,24 @@ class itiController extends Controller
         $post = new post();
         $post->title= $post_info['title'];
         $post->description = $post_info['description'];
-        $post->postedby = $post_info['postCreator'];
+        $post->postedby = $post_info['postedby'];
         $post->save();
-        return to_route('iti.home');
+        return to_route('iti.index');
     }
 
     function editpost($id){
         $post = post::findOrfail($id);
-        return view('iti.editform', ['post'=>$post]);
+        $users = user::all();
+        return view('iti.editform', ['post'=>$post,'users'=>$users]);
     }
     function update($id){
         $post_info= request()->all();
         $post = post::findOrfail($id);
         $post->title= $post_info['title'];
         $post->description = $post_info['description'];
-        $post->postedby = $post_info['postCreator'];
+        $post->postedby = $post_info['postedby'];
         $post->save();
-        return to_route('iti.home');
+        return to_route('iti.index');
     }
 
     function destroy($id){
@@ -80,6 +88,3 @@ class itiController extends Controller
         return view('iti.user', ['users'=>$users]);
     }
 }
-
-
-

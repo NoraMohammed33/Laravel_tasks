@@ -27,7 +27,7 @@ Route::get('/iti/{id}', [itiController::class, 'show'])->name('iti.show');
 Route::post("/iti", [itiController::class, 'save']);
 Route::put("/iti/{id}/update", [itiController::class, 'update'])->name('iti.update');
 Route::get('/iti/{id}/edit', [itiController::class, 'editpost'])->name('iti.edit');
-Route::get('/iti/{id}/destroy', [itiController::class, 'destroy'])->name('iti.destroy');
+Route::delete('/iti/{id}/destroy', [itiController::class, 'destroy'])->name('iti.destroy');
 Route::get('/users', [itiController::class, 'getuser']);
 
 
