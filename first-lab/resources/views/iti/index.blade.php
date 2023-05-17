@@ -23,7 +23,7 @@
                 <td> {{$post->title}}</td> 
                 <td> {{$post->description}}</td>
                 <td> {{$post->postedby}}</td>
-                <td> {{$post->created_at}}</td>
+                <td> {{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d') }}</td>
                 <td>  <a href="{{route('iti.show',$post->id)}}"  class="btn btn-info">  Show</a> </td>
                 <td>  <a href="{{route('iti.edit',$post->id)}}"  class="btn btn-warning">  Edit</a> </td>
                 <td>

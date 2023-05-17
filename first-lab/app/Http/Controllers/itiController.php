@@ -34,17 +34,22 @@ class itiController extends Controller
 
     function index(){
         $posts = post::paginate(10);
-        foreach($posts as $post)
-        {
-            $post['created_at']=Carbon::parse($post['created_at']);
-            $post['created_at']->format('d.m.Y');
-        }
+        // foreach($posts as $post)
+        // {
+        //     $post['created_at']=Carbon::parse($post->created_at)->format('Y-m-d');
+        // }
         return view('iti.index', ['posts'=>$posts]);
     }
 
     function show($id){
         $post = post::where('id', $id)->first();
         return view("iti.show", ['post'=>$post]);
+    }
+
+    function show_userPosts($name){
+        $posts = post::where('postedby', $name);
+        dd($posts);
+        //return view("iti.showuser", ['posts'=>$posts]);
     }
 
     function save(){
@@ -88,3 +93,7 @@ class itiController extends Controller
         return view('iti.user', ['users'=>$users]);
     }
 }
+
+
+
+

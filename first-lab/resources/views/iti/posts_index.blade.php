@@ -4,8 +4,6 @@
     ITI Website
 @endsection
 @section('body')
-
-
     <table class="table mt-5" >
             <tr>
                 <th> ID</th> 
